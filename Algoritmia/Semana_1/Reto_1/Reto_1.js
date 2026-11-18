@@ -13,6 +13,16 @@ const ventas = [
   { id: 12, fecha: "2026-09-06", cliente: "C08", producto: "Origen Nariño 250 g", ciudad: "Bogotá", cantidad: 3, precio: 26000 },
 ];
 
+
+let ventas_ciudad = new Map([
+  ["medellin", 0],
+  ["bogota", 0],
+  ["cali", 0],
+  ["pereira", 0]
+]
+);
+
+console.log(ventas_ciudad.medellin)
 const valorVenta = (venta) => venta.cantidad * venta.precio;
 function totalVendido(ventas) {
   let total = 0
@@ -58,14 +68,8 @@ function ticketPromedio(ventas) {
 
 // Ignora mayúsculas y espacios sobrantes
 function ventasPorCiudad(ventas, ciudad) {
-  let ventas_ciudad = new Map([
-    ["medellin", 0],
-    ["bogota", 0],
-    ["cali", 0],
-    ["pereira", 0]
-  ]
-  );
-
+  for (let i = 0; i < ventas.length; i++) {
+  }
   console.log(ventas_ciudad);
 }
 
@@ -73,4 +77,4 @@ console.log(`Total vendido: $${totalVendido(ventas)}.`);
 console.log(unidadesVendidas(ventas));
 console.log(ventaMayor(ventas));
 console.log(`Promedio: $${ticketPromedio(ventas).toFixed(0)}.`);
-console.log(ventasPorCiudad())
+console.log(ventasPorCiudad(ventas, ventasPorCiudad[0]))
