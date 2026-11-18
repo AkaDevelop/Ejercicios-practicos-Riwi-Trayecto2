@@ -58,10 +58,10 @@ function ticketPromedio(ventas) {
 
 // Ignora mayúsculas y espacios sobrantes
 function ventasPorCiudad(ventas, ciudad) {
-  
+
 }
 
 console.log(`Total vendido: $${totalVendido(ventas)}.`);
 console.log(unidadesVendidas(ventas));
 console.log(ventaMayor(ventas));
-console.log(ticketPromedio(ventas));
+console.log(`Promedio: $${ticketPromedio(ventas).toFixed(0)}.`);
