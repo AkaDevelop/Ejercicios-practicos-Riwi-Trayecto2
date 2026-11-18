@@ -24,7 +24,12 @@ function totalVendido(ventas) {
 }
 
 function unidadesVendidas(ventas) {
-
+  let total_unidades = 0
+  for (let i = 0; i < ventas.length; i++){
+    //console.log(ventas[i].precio);
+    total_unidades = total_unidades + ventas[i].cantidad;
+  }
+  return `Total de unidades vendidas: ${total_unidades} unidades.`;
 }
 
 // Devuelve el registro completo, no solo el valor
@@ -43,3 +48,4 @@ function ventasPorCiudad(ventas, ciudad) {
 }
 
 console.log(totalVendido(ventas));
+console.log(unidadesVendidas(ventas));
