@@ -20,9 +20,8 @@ function totalVendido(ventas) {
     //console.log(ventas[i].precio);
     total = total + (ventas[i].precio * ventas[i].cantidad);
   }
-  return `Total vendido: $${total}.`;
+  return total;
 }
-
 function unidadesVendidas(ventas) {
   let total_unidades = 0
   for (let i = 0; i < ventas.length; i++){
@@ -47,14 +46,22 @@ function ventaMayor(ventas) {
 
 // Total ÷ cantidad de ventas válidas (cantidad > 0)
 function ticketPromedio(ventas) {
-  
+  let total = totalVendido(ventas)
+  let contador = 0;
+  for (let i = 0; i < ventas.length; i++ ){
+    if (ventas[i].cantidad !== 0){
+      contador = contador+1
+    }
+  }
+  return total/contador
 }
 
 // Ignora mayúsculas y espacios sobrantes
 function ventasPorCiudad(ventas, ciudad) {
-
+  
 }
 
-console.log(totalVendido(ventas));
+console.log(`Total vendido: $${totalVendido(ventas)}.`);
 console.log(unidadesVendidas(ventas));
 console.log(ventaMayor(ventas));
+console.log(ticketPromedio(ventas));
