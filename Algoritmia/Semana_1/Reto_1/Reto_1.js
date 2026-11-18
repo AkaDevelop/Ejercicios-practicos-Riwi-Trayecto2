@@ -57,7 +57,7 @@ function ticketPromedio(ventas) {
 }
 
 // Ignora mayúsculas y espacios sobrantes
-function ventasPorCiudad() {
+function ventasPorCiudad(ventas, ciudad) {
   let ventas_ciudad = new Map([
     ["medellin", 0],
     ["bogota", 0],
