@@ -49,7 +49,7 @@ function ticketPromedio(ventas) {
   let total = totalVendido(ventas)
   let contador = 0;
   for (let i = 0; i < ventas.length; i++ ){
-    if (ventas[i].cantidad !== 0){
+    if (ventas[i].cantidad > 0){
       contador = contador+1
     }
   }
@@ -58,7 +58,7 @@ function ticketPromedio(ventas) {
 
 // Ignora mayúsculas y espacios sobrantes
 function ventasPorCiudad(ventas, ciudad) {
-
+  
 }
 
 console.log(`Total vendido: $${totalVendido(ventas)}.`);
