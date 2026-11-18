@@ -34,12 +34,20 @@ function unidadesVendidas(ventas) {
 
 // Devuelve el registro completo, no solo el valor
 function ventaMayor(ventas) {
-
+  let mayor = ventas[0];
+  // console.log(mayor);
+  for (let i = 1; i < ventas.length; i++) {
+    if ((ventas[i].cantidad * ventas[i].precio) > (mayor.cantidad * mayor.precio )) {
+      mayor = ventas[i];
+      // console.log(mayor);
+    }
+  }
+  return `Venta mayor: ${mayor.cliente} - ${mayor.producto} - $${mayor.cantidad * mayor.precio}`;
 }
 
 // Total ÷ cantidad de ventas válidas (cantidad > 0)
 function ticketPromedio(ventas) {
-
+  
 }
 
 // Ignora mayúsculas y espacios sobrantes
@@ -49,3 +57,4 @@ function ventasPorCiudad(ventas, ciudad) {
 
 console.log(totalVendido(ventas));
 console.log(unidadesVendidas(ventas));
+console.log(ventaMayor(ventas));
