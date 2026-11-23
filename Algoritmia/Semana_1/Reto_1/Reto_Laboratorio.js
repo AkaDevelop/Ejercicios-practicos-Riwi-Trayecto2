@@ -52,11 +52,21 @@ function ticketPromedio(ventas) {
 
 // Ignora mayúsculas y espacios sobrantes
 function ventasPorCiudad(ventas, ciudad) {
-  for (let i = 0; i < ventas.length; i++) {
-
+  let ciudades = new Map(
+    [
+      ["medellín",],
+      ["",],
+      [,],
+      [,]
+    ]
+  )
+  for (const venta of ventas) {
+    
   }
   console.log(ventas_ciudad);
+
 }
+
 
 console.log(`Total vendido: $${totalVendido(ventas)}.`);
 console.log(unidadesVendidas(ventas));
