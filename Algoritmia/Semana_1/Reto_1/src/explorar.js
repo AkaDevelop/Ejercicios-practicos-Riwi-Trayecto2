@@ -5,7 +5,12 @@ const {
     totalVendido,
     ventaMayor,
     ticketPromedio,
-    ventasPorCiudad
+    ventasPorCiudad,
+    totalVendidoM,
+    unidadesVendidasM,
+    ventasPorCiudadM,
+    unidadesPorProducto,
+    topProductosPorValor
 } = require("./analitica.js")
 
 let arrayVacio = []
@@ -20,3 +25,8 @@ console.table({"Total general": totalVendido(ventas)})
 ventaMayor(ventas)
 ticketPromedio(ventas)
 ventasPorCiudad(arrayVacio,"Bogotá")
+
+totalVendidoM(ventas)
+unidadesVendidasM(ventas)
+ventasPorCiudadM(ventas, "Medellín")
+unidadesPorProducto(ventas)

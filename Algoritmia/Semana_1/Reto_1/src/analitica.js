@@ -61,7 +61,7 @@ function ventasPorCiudad(ventas, ciudad) {
   for (const venta of ventas) {
     ciudadtrim = venta.ciudad.trim().toLowerCase()
     ciudadinput = ciudad.trim().toLowerCase()
-    console.log(venta.ciudad)
+    //console.log(venta.ciudad)
     if (ciudadtrim === ciudadinput) {
       contador += venta.cantidad
       //console.log(contador, venta.cantidad, venta.ciudad)
@@ -79,15 +79,42 @@ function ventasPorCiudad(ventas, ciudad) {
 
 
 // _______________ Funciones con métodos de arrays ____________
-function totalVendidoM(ventas){
-
+function totalVendidoM(ventas) {
+  let totalSum = 0
+  ventas.filter(venta => totalSum += valorVenta(venta))
+  return console.table({ "Total general": totalSum })
 }
 
-function unidadesVendidasM(ventas){
-
+function unidadesVendidasM(ventas) {
+  let unidadesVendidas = 0
+  ventas.filter(venta => unidadesVendidas += venta.cantidad)
+  return console.table({ "Total de unidades vendidas": unidadesVendidas })
 }
 
-function ventasPorCiudadM(ventas, ciudad){
+function ventasPorCiudadM(ventas, ciudad) {
+  let ciudadTrim = ciudad.trim().toLowerCase();
+
+  let ventasPorCiudad = ventas.filter(venta => venta.ciudad.trim().toLowerCase() === ciudadTrim)
+    .reduce((total, venta) => venta.cantidad + total, 0);
+  return console.table(new Map(
+    [
+      [ciudadTrim, ventasPorCiudad]
+    ]
+  )
+  );
+}
+
+function unidadesPorProducto(ventas) {
+  let unidadesPorProducto =
+    ventas.filter(venta => venta.cantidad > 0)
+      .reduce((newMap, venta) => {
+        newMap.set(venta.producto, (newMap.get(venta.producto) || 0) + venta.cantidad)
+        return newMap
+      }, new Map())    
+  return console.table([...unidadesPorProducto])
+}
+
+function topProductosPorValor(ventas, k){
 
 }
 
@@ -97,5 +124,10 @@ module.exports = {
   totalVendido,
   ventaMayor,
   ticketPromedio,
-  ventasPorCiudad
+  ventasPorCiudad,
+  totalVendidoM,
+  unidadesVendidasM,
+  ventasPorCiudadM,
+  unidadesPorProducto,
+  topProductosPorValor
 }
