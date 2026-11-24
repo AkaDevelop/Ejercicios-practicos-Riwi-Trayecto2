@@ -1,0 +1,3 @@
+function primeraVenta(ventas){
+    
+}
