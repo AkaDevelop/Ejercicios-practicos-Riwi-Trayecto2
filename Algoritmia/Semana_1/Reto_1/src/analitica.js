@@ -1,3 +1,5 @@
+const prompts = require('prompt-sync')();
+
 function mostrarTabla(ventas) {
   if (ventas === undefined) {
     //Borde: Posición que no existe, devuelve undefined.
@@ -128,11 +130,11 @@ function topProductosPorValor(ventas, k) {
   //Luego de saber la longitud que quiero filtrar
   //Solo es crear un array nuevo, puede ser con un for. 
   //O mirare un metodo existe para contruirlo con los primeros K registros.
-  
+
 
   //Con esto mapeamos una array nuevo en otra posicion en la memoria
   //Con una columna o clave nueva llamada total en cada fila
-  const ventasCopia = ventas.map(venta => ({ ...venta, total: valorVenta(venta) }));
+  const ventasCopia = ventas.map(venta => ({ ...venta, total: valorVenta(venta).toLocaleString("es-CO") }));
 
   //Ordenamos con sort de manera descendente, para poder tener el mayor de primero siempre.
   ventasCopia.sort((ventaMayor, ventaMenor) => ventaMenor.total - ventaMayor.total);
@@ -146,12 +148,13 @@ function topProductosPorValor(ventas, k) {
       k = Number(prompts("Ingrese la cantidad de registros que desea ver: "))
 
 
-      if (k < 0 || k > ventas.length() || !Number.isInteger(k)) {
-        console.log(`Ese número de registros no existe
-        Se mostrará el total de registros hallados
-        Total de registros = ${ventas.length}`)
+      if (k < 0 || k > ventas.length || !Number.isInteger(k)) {
+
+        //si k registros no existe entonces k = ventas.longitud y melo.
+        //Se mostrará el total de registros hallados
+        //Total de registros 
         k = ventas.length
-        continue
+        break;
       }
       break;
     }
@@ -159,9 +162,9 @@ function topProductosPorValor(ventas, k) {
   }
 
 
-  //Como ya confirmamos que K es válido, ahora si hacemos un slice, para imprimir desde la posicion 0, 
-  //Hasta k - 1 por el tema de posiciones de arrays, pero haré prueba primero. 
-  console.table(ventasCopia.slice(0, k))
+  //Como ya confirmamos que K es válido, ahora si hacemos un slice,
+  //Para imprimir desde la posicion 0 hasta k.
+  return console.table(ventasCopia.slice(0, k))
 }
 
 module.exports = {
