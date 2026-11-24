@@ -3,7 +3,7 @@ function mostrarTabla(ventas) {
     //Borde: Posición que no existe, devuelve undefined.
     return console.log("No es halló el registro.")
   }
-  for (const venta of ventas){
+  for (const venta of ventas) {
     venta.precioCOP = venta.precio.toLocaleString("es-CO")
   }
   //Muestra la tabla completa.
@@ -113,12 +113,55 @@ function unidadesPorProducto(ventas) {
       .reduce((newMap, venta) => {
         newMap.set(venta.producto, (newMap.get(venta.producto) || 0) + venta.cantidad)
         return newMap
-      }, new Map())    
+      }, new Map())
   return console.table([...unidadesPorProducto])
 }
 
-function topProductosPorValor(ventas, k){
+function topProductosPorValor(ventas, k) {
+  //Copio el array completo en un nuevo espacio en la memoria. Listo
+  //Organizo el array de mayor a menor ventas segun total, Listo
+  //Uso una funcion ya creada para factorizar código Listo (Valorventa)
+  //Esta funcion necesita que K sea un número de longitud. Construccion
+  //Tengo que limitar los bordes, por ejemplo array.longitud es 12.
+  //Entonces, si K > 12 o K < 0, devuelve un mensaje de error o 
+  //Pido un valor válido, hasta que se cumpla.
+  //Luego de saber la longitud que quiero filtrar
+  //Solo es crear un array nuevo, puede ser con un for. 
+  //O mirare un metodo existe para contruirlo con los primeros K registros.
+  
 
+  //Con esto mapeamos una array nuevo en otra posicion en la memoria
+  //Con una columna o clave nueva llamada total en cada fila
+  const ventasCopia = ventas.map(venta => ({ ...venta, total: valorVenta(venta) }));
+
+  //Ordenamos con sort de manera descendente, para poder tener el mayor de primero siempre.
+  ventasCopia.sort((ventaMayor, ventaMenor) => ventaMenor.total - ventaMayor.total);
+
+  //Con el if estamos diciendo practicamente si no tienes 
+  //Un valor en la funcion definido con anterioridad pide un input al usuario.
+  if (k === null || k === undefined) {
+    //Controlamos K con while para que cumpla una longitud valida
+    //Y coherente con el array que estamos validando
+    while (true) {
+      k = Number(prompts("Ingrese la cantidad de registros que desea ver: "))
+
+
+      if (k < 0 || k > ventas.length() || !Number.isInteger(k)) {
+        console.log(`Ese número de registros no existe
+        Se mostrará el total de registros hallados
+        Total de registros = ${ventas.length}`)
+        k = ventas.length
+        continue
+      }
+      break;
+    }
+
+  }
+
+
+  //Como ya confirmamos que K es válido, ahora si hacemos un slice, para imprimir desde la posicion 0, 
+  //Hasta k - 1 por el tema de posiciones de arrays, pero haré prueba primero. 
+  console.table(ventasCopia.slice(0, k))
 }
 
 module.exports = {
