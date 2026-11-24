@@ -3,6 +3,9 @@ function mostrarTabla(ventas) {
     //Borde: Posición que no existe, devuelve undefined.
     return console.log("No es halló el registro.")
   }
+  for (const venta of ventas){
+    venta.precioCOP = venta.precio.toLocaleString("es-CO")
+  }
   //Muestra la tabla completa.
   return console.table(ventas)
 }
