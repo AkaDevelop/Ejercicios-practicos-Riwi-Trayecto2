@@ -45,7 +45,7 @@ while (true) {
         continue
     }
     else if (option == 3) {
-        topProductosPorValor(ventas,null) //Falta construir la función todavía.
+        topProductosPorValor(ventas,3) //Falta construir la función todavía.
         continue
     }
     else if (option == 4) {
@@ -62,7 +62,7 @@ while (true) {
     }
 
     else if (option == 7) {
-        ventasPorCiudad(ventas, "Pereira");
+        ventasPorCiudad(ventas, "Bogotá");
         continue
     }
 

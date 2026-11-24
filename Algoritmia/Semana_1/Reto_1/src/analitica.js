@@ -35,7 +35,7 @@ function ventaMayor(ventas) {
     }
   }
   console.table(mayor);
-  return console.table({ "Total vendido": valorVenta(mayor) })
+  return console.table({ "Total vendido": valorVenta(mayor).toLocaleString("es-CO") })
 }
 
 function ticketPromedio(ventas) {
@@ -48,7 +48,7 @@ function ticketPromedio(ventas) {
     }
   }
   promedio = Math.round(total / contador)
-  return console.table({ "Promedio general": promedio })
+  return console.table({ "Promedio general": promedio.toLocaleString("es-CO") })
 }
 
 function ventasPorCiudad(ventas, ciudad) {
@@ -62,6 +62,7 @@ function ventasPorCiudad(ventas, ciudad) {
     ]
   )
   let ciudadtrim;
+  let ciudadinput;
   let contador = 0;
   for (const venta of ventas) {
     ciudadtrim = venta.ciudad.trim().toLowerCase()
@@ -79,7 +80,9 @@ function ventasPorCiudad(ventas, ciudad) {
     console.log(error.message)
     console.log("Como ingresó una lista vacía no se puede validar la ciudad.")
   }
-  return console.table(ciudades);
+  return console.table(new Map([
+    [ciudadinput, ciudades.get(ciudadinput)]
+  ]));
 }
 
 
@@ -87,7 +90,7 @@ function ventasPorCiudad(ventas, ciudad) {
 function totalVendidoM(ventas) {
   let totalSum = 0
   ventas.filter(venta => totalSum += valorVenta(venta))
-  return console.table({ "Total general": totalSum })
+  return console.table({ "Total general": totalSum.toLocaleString("es-CO") })
 }
 
 function unidadesVendidasM(ventas) {
