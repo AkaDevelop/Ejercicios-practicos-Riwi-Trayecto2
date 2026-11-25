@@ -1,5 +1,6 @@
+const ventas = require("../../Reto_1/src/datos");
 
-const bigData = generarVentas(200);
+const bigData = generarVentas(1000);
 
 function generarVentas(n) {
     //Primero se deben crear los registros para jugar con la aleatoriedad
@@ -19,7 +20,7 @@ function generarVentas(n) {
         "Cali"
     ]
     let bigDataVentas = []
-    
+
     function aleatorio(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -56,12 +57,12 @@ function totalVendido(ventas) {
     while (true) {
         if (contador < ventas.length) {
             total = total + (ventas[contador].precio * ventas[contador].cantidad);
-            contador = contador + 1  
-        }else{
+            contador = contador + 1
+        } else {
             break
         }
     }
-   
+
     /*for (let i = 0; i < ventas.length; i++) {
         //console.log(ventas[i].precio);
         total2 = total2 + (ventas[i].precio * ventas[i].cantidad);
@@ -70,17 +71,77 @@ function totalVendido(ventas) {
     return total;
 }
 
-function ventaMayor() {
+function ventaMayor(ventas) {
+    let mayor = ventas[0];
+    let contador = 0;
+    // console.log(mayor);
 
+    while (contador < ventas.length) {
+        if ((ventas[contador].cantidad * ventas[contador].precio) > (mayor.cantidad * mayor.precio)) {
+            mayor = ventas[contador];
+            
+            // console.log(mayor);
+        }
+        contador++;
+    }
+    /*for (let i = 1; i < ventas.length; i++) {
+      if ((ventas[i].cantidad * ventas[i].precio) > (mayor.cantidad * mayor.precio)) {
+        mayor = ventas[i];
+        // console.log(mayor);
+      }
+    }*/
+    mayor.precioCop = `$${mayor.precio.toLocaleString("es-CO")}`
+    return mayor;
 }
 
-function totalPorCiudad() {
+function totalPorCiudad(ventas, ciudad) {
+  let ciudades = new Map(
+    [
+      ["medellín", 0],
+      ["bogotá", 0],
+      ["pereira", 0],
+      ["cali", 0]
+    ]
+  )
+  let ciudadtrim;
+  let ciudadinput;
+  let sumaTotal = 0;
+  let contador = 0;
 
+  while (contador < ventas.length){
+    ciudadtrim = ventas[contador].ciudad.trim().toLowerCase()
+    ciudadinput = ciudad.trim().toLowerCase()
+    //console.log(venta.ciudad)
+    if (ciudadtrim === ciudadinput) {
+      sumaTotal += ventas[contador].precio
+      //console.log(contador, venta.cantidad, venta.ciudad)
+    }
+    contador ++;
+  }
+
+  /*for (const venta of ventas) {
+    ciudadtrim = venta.ciudad.trim().toLowerCase()
+    ciudadinput = ciudad.trim().toLowerCase()
+    //console.log(venta.ciudad)
+    if (ciudadtrim === ciudadinput) {
+      sumaTotal += venta.total
+      //console.log(contador, venta.cantidad, venta.ciudad)
+    }*/
+  try {
+    ciudades.set(ciudadinput, sumaTotal)
+  } catch (error) {
+    console.log(error.message)
+    console.log("Como ingresó una lista vacía no se puede validar la ciudad.")
+  }
+  return new Map([
+    [ciudadinput, `$${ciudades.get(ciudadinput).toLocaleString("es-CO")}`]
+  ]);
 }
-
 
 
 
 console.table(bigData);
 //totalVendido(bigData)
 console.table({ "Total vendido": `$${totalVendido(bigData).toLocaleString("es-CO")}` })
+console.table(ventaMayor(bigData))
+console.table(totalPorCiudad(bigData, "Medellín"))
