@@ -1,4 +1,6 @@
 
+const bigData = generarVentas(200);
+
 function generarVentas(n) {
 
     //Primero se deben crear los registros para jugar con la aleatoriedad
@@ -16,25 +18,41 @@ function generarVentas(n) {
         "Pereira",
         "Bogotá",
         "Cali"
-    ] 
+    ]
 
-    let tipoCliente;
-    let cantidadProducto;
-    const cantidadClientes = aleatorio(1, Math.max(1, Math.floor(n / 3)));
+    //const cantidadClientes = aleatorio(1, Math.max(1, Math.floor(n / 3)));
     function aleatorio(min, max) {
-        return Math.floor(Math.random() * (max - min) ) + min;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    
+    let bigDataVentas = []
 
-    tipoCliente = `C0${aleatorio(1,8)}` //Asi vamos a generar el tipo cliente
-    cantidadProducto = aleatorio(1,5) //Así la cantidad.
-    
-    console.log(cantidadClientes)
-    console.log(tipoCliente)
-    console.log(cantidadProducto)
-    console.log(ciudades[aleatorio(0,3)]) //Selecciona e imprime una ciudad aleatoria
-    console.log(productos[aleatorio(0,4)]) //Selecciona e imprime un producto:valor aleatorio
+    //Asi vamos a generar el tipo cliente aleatorio: `C0${aleatorio(1, 8)}` 
+    //Así la cantidad aleatoria: aleatorio(1, 5) 
+    //console.log(cantidadClientes)
+    //console.log(tipoCliente)
+    //console.log(cantidadProducto)
+    //console.log(ciudades[aleatorio(0, 3)]) 
+    //console.log(productos[aleatorio(0, 4)]) //Selecciona e imprime un producto:valor aleatorio
+
+    for (let i = 0; i < n; i++) {
+        let aleatorioNum= aleatorio(0,4) //Necesario para pasar el mismo aleatorio a valor y producto.
+        bigDataVentas.push(
+            {
+                id: i + 1,
+                cliente: `C0${ aleatorio(1, Math.max(1, Math.floor(n / 3)))}`,
+                producto: productos[aleatorioNum].nombre,
+                ciudad: ciudades[aleatorio(0, 3)],
+                cantidad: aleatorio(1, 5),
+                precio: productos[aleatorioNum].precio
+               
+            }
+        )
+
+    }
+
+    return bigDataVentas
+
 }
 
 function totalVendido() {
@@ -50,4 +68,6 @@ function totalPorCiudad() {
 }
 
 
-generarVentas(4000)
+
+
+console.table(bigData);
