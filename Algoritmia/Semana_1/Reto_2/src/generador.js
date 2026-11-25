@@ -1,122 +1,114 @@
-const ventas = require("../../Reto_1/src/datos");
-
-const bigData = generarVentas(1000);
 
 function generarVentas(n) {
-    //Primero se deben crear los registros para jugar con la aleatoriedad
-    //Creamos una funcion con math.random Scada de 3wschool para valores aleatorios.
-    const productos = [
-        { nombre: "Origen Huila 500 g", precio: 42000 },
-        { nombre: "Origen Nariño 250 g", precio: 26000 },
-        { nombre: "Prensa francesa", precio: 95000 },
-        { nombre: "Origen Sierra 500 g", precio: 45000 },
-        { nombre: "Molino manual", precio: 120000 }
-    ];
-    const cantidadClientes = aleatorio(1, Math.max(1, Math.floor(n / 3)));
-    const ciudades = [
-        "Medellín",
-        "Pereira",
-        "Bogotá",
-        "Cali"
-    ]
-    let bigDataVentas = []
+  //Primero se deben crear los registros para jugar con la aleatoriedad
+  //Creamos una funcion con math.random Scada de 3wschool para valores aleatorios.
+  const productos = [
+    { nombre: "Origen Huila 500 g", precio: 42000 },
+    { nombre: "Origen Nariño 250 g", precio: 26000 },
+    { nombre: "Prensa francesa", precio: 95000 },
+    { nombre: "Origen Sierra 500 g", precio: 45000 },
+    { nombre: "Molino manual", precio: 120000 },
+  ];
+  const cantidadClientes = aleatorio(1, Math.max(1, Math.floor(n / 3)));
+  const ciudades = ["Medellín", "Pereira", "Bogotá", "Cali"];
+  let bigDataVentas = [];
 
-    function aleatorio(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    //Asi vamos a generar el tipo cliente aleatorio: `C0${aleatorio(1, 8)}` 
-    //Así la cantidad aleatoria: aleatorio(1, 5) 
-    //console.log(cantidadClientes)
-    //console.log(tipoCliente)
-    //console.log(cantidadProducto)
-    //console.log(ciudades[aleatorio(0, 3)]) 
-    //console.log(productos[aleatorio(0, 4)]) //Selecciona e imprime un producto:valor aleatorio
+  function aleatorio(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  //Asi vamos a generar el tipo cliente aleatorio: `C0${aleatorio(1, 8)}`
+  //Así la cantidad aleatoria: aleatorio(1, 5)
+  //console.log(cantidadClientes)
+  //console.log(tipoCliente)
+  //console.log(cantidadProducto)
+  //console.log(ciudades[aleatorio(0, 3)])
+  //console.log(productos[aleatorio(0, 4)]) //Selecciona e imprime un producto:valor aleatorio
 
-    for (let i = 0; i < n; i++) {
-        let aleatorioNum = aleatorio(0, 4) //Necesario para pasar el mismo aleatorio a valor y producto.
-        bigDataVentas.push(
-            {
-                id: i + 1,
-                cliente: `C0${aleatorio(1, cantidadClientes)}`,
-                producto: productos[aleatorioNum].nombre,
-                ciudad: ciudades[aleatorio(0, 3)],
-                cantidad: aleatorio(1, 5),
-                precio: productos[aleatorioNum].precio
-
-            }
-        )
-
-    }
-    return bigDataVentas
+  for (let i = 0; i < n; i++) {
+    let aleatorioNum = aleatorio(0, 4); //Necesario para pasar el mismo aleatorio a valor y producto.
+    bigDataVentas.push({
+      id: i + 1,
+      cliente: `C0${aleatorio(1, cantidadClientes)}`,
+      producto: productos[aleatorioNum].nombre,
+      ciudad: ciudades[aleatorio(0, 3)],
+      cantidad: aleatorio(1, 5),
+      precio: productos[aleatorioNum].precio,
+      precioCOP: `$${productos[aleatorioNum].precio.toLocaleString("es-CO")}`
+    });
+  }
+  return bigDataVentas;
 }
 
 function totalVendido(ventas) {
-    let total = 0
-    //let total2 = 0
-    let contador = 0
-    while (true) {
-        if (contador < ventas.length) {
-            total = total + (ventas[contador].precio * ventas[contador].cantidad);
-            contador = contador + 1
-        } else {
-            break
-        }
+  let total = 0;
+  //let total2 = 0
+  let contador = 0;
+  while (true) {
+    if (contador < ventas.length) {
+      total = total + ventas[contador].precio * ventas[contador].cantidad;
+      contador = contador + 1;
+    } else {
+      break;
     }
+  }
 
-    /*for (let i = 0; i < ventas.length; i++) {
+  /*for (let i = 0; i < ventas.length; i++) {
         //console.log(ventas[i].precio);
         total2 = total2 + (ventas[i].precio * ventas[i].cantidad);
     }*/
-    //console.table({ "Total vendido": `$${total2.toLocaleString("es-CO")}` });
-    return total;
+  //console.table({ "Total vendido": `$${total2.toLocaleString("es-CO")}` });
+  return total;
 }
 
 function ventaMayor(ventas) {
-    let mayor = ventas[0];
-    let contador = 0;
-    // console.log(mayor);
+  let mayor = ventas[0];
+  let contador = 0;
+  // console.log(mayor);
 
-    while (contador < ventas.length) {
-        if ((ventas[contador].cantidad * ventas[contador].precio) > (mayor.cantidad * mayor.precio)) {
-            mayor = ventas[contador];
-            
-            // console.log(mayor);
-        }
-        contador++;
+  while (contador < ventas.length) {
+    
+    if (
+      ventas[contador].cantidad * ventas[contador].precio >
+      mayor.cantidad * mayor.precio
+    ) {
+      mayor = ventas[contador];
+      
+      // console.log(mayor);
     }
-    /*for (let i = 1; i < ventas.length; i++) {
+    //mayor.precioCop = `$${mayor.precio.toLocaleString("es-CO")}`;
+    contador++;
+  }
+  /*for (let i = 1; i < ventas.length; i++) {
       if ((ventas[i].cantidad * ventas[i].precio) > (mayor.cantidad * mayor.precio)) {
         mayor = ventas[i];
         // console.log(mayor);
       }
     }*/
-    mayor.precioCop = `$${mayor.precio.toLocaleString("es-CO")}`
-    return mayor;
+  
+  return mayor;
 }
 
 function totalPorCiudad(ventas, ciudad) {
-  let ciudades = new Map(
-    [
-      ["medellín", 0],
-      ["bogotá", 0],
-      ["pereira", 0],
-      ["cali", 0]
-    ]
-  )
+  let ciudades = new Map([
+    ["medellín", 0],
+    ["bogotá", 0],
+    ["pereira", 0],
+    ["cali", 0],
+  ]);
   let ciudadtrim;
   let ciudadinput;
   let sumaTotal = 0;
   let contador = 0;
 
-  while (contador < ventas.length){
-    ciudadtrim = ventas[contador].ciudad.trim().toLowerCase()
-    ciudadinput = ciudad.trim().toLowerCase()
+  while (contador < ventas.length) {
+    ciudadtrim = ventas[contador].ciudad.trim().toLowerCase();
+    ciudadinput = ciudad.trim().toLowerCase();
     //console.log(venta.ciudad)
     if (ciudadtrim === ciudadinput) {
-      sumaTotal += ventas[contador].precio
+      sumaTotal += ventas[contador].precio;
       //console.log(contador, venta.cantidad, venta.ciudad)
     }
-    contador ++;
+    contador++;
   }
 
   /*for (const venta of ventas) {
@@ -128,20 +120,33 @@ function totalPorCiudad(ventas, ciudad) {
       //console.log(contador, venta.cantidad, venta.ciudad)
     }*/
   try {
-    ciudades.set(ciudadinput, sumaTotal)
+    ciudades.set(ciudadinput, sumaTotal);
   } catch (error) {
-    console.log(error.message)
-    console.log("Como ingresó una lista vacía no se puede validar la ciudad.")
+    console.log(error.message);
+    console.log("Como ingresó una lista vacía no se puede validar la ciudad.");
   }
   return new Map([
-    [ciudadinput, `$${ciudades.get(ciudadinput).toLocaleString("es-CO")}`]
+    [ciudadinput, `$${ciudades.get(ciudadinput).toLocaleString("es-CO")}`],
   ]);
 }
 
+function primeraVenta(ventas) {
 
+}
 
-console.table(bigData);
+module.exports = {
+  generarVentas,
+  totalPorCiudad,
+  totalVendido,
+  ventaMayor,
+  primeraVenta,
+};
+/*console.table(bigData);
 //totalVendido(bigData)
-console.table({ "Total vendido": `$${totalVendido(bigData).toLocaleString("es-CO")}` })
-console.table(ventaMayor(bigData))
-console.table(totalPorCiudad(bigData, "Medellín"))
+console.table({
+  "Total vendido": `$${totalVendido(bigData).toLocaleString("es-CO")}`,
+});
+console.table(ventaMayor(bigData));
+console.table(totalPorCiudad(bigData, "Medellín"));
+
+*/
