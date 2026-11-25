@@ -36,16 +36,16 @@ function generarVentas(n) {
     //console.log(productos[aleatorio(0, 4)]) //Selecciona e imprime un producto:valor aleatorio
 
     for (let i = 0; i < n; i++) {
-        let aleatorioNum= aleatorio(0,4) //Necesario para pasar el mismo aleatorio a valor y producto.
+        let aleatorioNum = aleatorio(0, 4) //Necesario para pasar el mismo aleatorio a valor y producto.
         bigDataVentas.push(
             {
                 id: i + 1,
-                cliente: `C0${ aleatorio(1, Math.max(1, Math.floor(n / 3)))}`,
+                cliente: `C0${aleatorio(1, Math.max(1, Math.floor(n / 3)))}`,
                 producto: productos[aleatorioNum].nombre,
                 ciudad: ciudades[aleatorio(0, 3)],
                 cantidad: aleatorio(1, 5),
                 precio: productos[aleatorioNum].precio
-               
+
             }
         )
 
@@ -55,8 +55,25 @@ function generarVentas(n) {
 
 }
 
-function totalVendido() {
-
+function totalVendido(ventas) {
+    let total = 0
+    //let total2 = 0
+    let contador = 0
+    while (true) {
+        if (contador < ventas.length) {
+            total = total + (ventas[contador].precio * ventas[contador].cantidad);
+            contador = contador + 1  
+        }else{
+            break
+        }
+    }
+   
+    /*for (let i = 0; i < ventas.length; i++) {
+        //console.log(ventas[i].precio);
+        total2 = total2 + (ventas[i].precio * ventas[i].cantidad);
+    }*/
+    //console.table({ "Total vendido": `$${total2.toLocaleString("es-CO")}` });
+    return console.table({ "Total vendido": `$${total.toLocaleString("es-CO")}` });
 }
 
 function ventaMayor() {
@@ -71,3 +88,4 @@ function totalPorCiudad() {
 
 
 console.table(bigData);
+totalVendido(bigData)
