@@ -131,7 +131,7 @@ function totalPorCiudad(ventas, ciudad) {
 }
 
 function primeraVenta(ventas) {
-
+  return ventas[0]
 }
 
 module.exports = {
