@@ -2,7 +2,6 @@
 const bigData = generarVentas(200);
 
 function generarVentas(n) {
-
     //Primero se deben crear los registros para jugar con la aleatoriedad
     //Creamos una funcion con math.random Scada de 3wschool para valores aleatorios.
     const productos = [
@@ -12,21 +11,18 @@ function generarVentas(n) {
         { nombre: "Origen Sierra 500 g", precio: 45000 },
         { nombre: "Molino manual", precio: 120000 }
     ];
-
-    let ciudades = [
+    const cantidadClientes = aleatorio(1, Math.max(1, Math.floor(n / 3)));
+    const ciudades = [
         "Medellín",
         "Pereira",
         "Bogotá",
         "Cali"
     ]
-
-    //const cantidadClientes = aleatorio(1, Math.max(1, Math.floor(n / 3)));
+    let bigDataVentas = []
+    
     function aleatorio(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-
-    let bigDataVentas = []
-
     //Asi vamos a generar el tipo cliente aleatorio: `C0${aleatorio(1, 8)}` 
     //Así la cantidad aleatoria: aleatorio(1, 5) 
     //console.log(cantidadClientes)
@@ -40,7 +36,7 @@ function generarVentas(n) {
         bigDataVentas.push(
             {
                 id: i + 1,
-                cliente: `C0${aleatorio(1, Math.max(1, Math.floor(n / 3)))}`,
+                cliente: `C0${aleatorio(1, cantidadClientes)}`,
                 producto: productos[aleatorioNum].nombre,
                 ciudad: ciudades[aleatorio(0, 3)],
                 cantidad: aleatorio(1, 5),
@@ -50,9 +46,7 @@ function generarVentas(n) {
         )
 
     }
-
     return bigDataVentas
-
 }
 
 function totalVendido(ventas) {
@@ -73,7 +67,7 @@ function totalVendido(ventas) {
         total2 = total2 + (ventas[i].precio * ventas[i].cantidad);
     }*/
     //console.table({ "Total vendido": `$${total2.toLocaleString("es-CO")}` });
-    return console.table({ "Total vendido": `$${total.toLocaleString("es-CO")}` });
+    return total;
 }
 
 function ventaMayor() {
@@ -88,4 +82,5 @@ function totalPorCiudad() {
 
 
 console.table(bigData);
-totalVendido(bigData)
+//totalVendido(bigData)
+console.table({ "Total vendido": `$${totalVendido(bigData).toLocaleString("es-CO")}` })
