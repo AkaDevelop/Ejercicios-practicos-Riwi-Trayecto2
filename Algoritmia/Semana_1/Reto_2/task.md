@@ -1,16 +1,21 @@
-# Un compañero de Nodo Digital agregó al motor un reporte de clientes recurrentes (clientes que compraron más de una vez). Con los datos de prueba funcionó, pero cuando la gerente lo ejecutó con el historial anual “se quedó pensando varios minutos”. Esta es la función que escribió tu compañero:
+# Día 2
+
+Un compañero de Nodo Digital agregó al motor un reporte de clientes recurrentes (clientes que compraron más de una vez). Con los datos de prueba funcionó, pero cuando la gerente lo ejecutó con el historial anual “se quedó pensando varios minutos”. Esta es la función que escribió tu compañero:
+
 ```
 function clientesRecurrentes(ventas) {</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> const recurrentes = [];</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> for (let i = 0; i < ventas.length; i++) {</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> for (let j = i + 1; j < ventas.length; j++) {</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> if (ventas[i].cliente === ventas[j].cliente &&</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> !recurrentes.includes(ventas[i].cliente)) {</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> recurrentes.push(ventas[i].cliente);</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> }
 }
 }
 return recurrentes;
-} ```
+}
+```
 
 ## Objetivo
 
 Diagnosticar la complejidad de una función con ciclos anidados, medir su tiempo real y predecir su comportamiento con volúmenes que todavía no existen.
 
 ### PASOS
+
 Instrucciones
 Agrega la función al motor y verifica con los 12 datos del Día 1 que es correcta: debe devolver los clientes C01, C02 y C03.
 Haz una traza en la bitácora con un arreglo de 5 ventas e indica cuántas comparaciones hace. Generaliza: ¿cuántas comparaciones hace con n ventas?
@@ -31,3 +36,19 @@ La tabla de tiempos incluye al menos cinco tamaños de entrada que se duplican.
 La bitácora muestra que, al duplicar n, el tiempo se multiplica aproximadamente por cuatro.
 La estimación para 1.000.000 de ventas está calculada a partir de las mediciones, no supuesta.
 La conclusión para la gerente explica el problema en lenguaje de negocio.
+
+#### Minireto 7:
+- Escribe una función totalCiudadCadena(ventas, ciudad) que normalice las ciudades con map, filtre con filter, calcule el valor con map y sume con reduce.
+- Escribe totalCiudadUnaPasada(ventas, ciudad), que obtenga el mismo resultado con un solo ciclo y sin crear arreglos intermedios.
+- Comprueba con el generador que ambas devuelven el mismo valor para 10.000 ventas.
+- Cuenta, para cada versión, cuántos recorridos completos hace y cuántos arreglos nuevos crea. Expresa ambas en notación Big O de tiempo y de espacio.
+- Explica en la bitácora por qué ambas son ONo en tiempo aunque una recorra el arreglo cuatro veces (reglas de simplificación: se eliminan las constantes).Clasifica la complejidad espacial de todas las funciones del motor: ¿cuáles usan memoria adicional constante, O(1), y cuáles proporcional a los datos, ONo? Presta atención a totalPorCiudad y a topProductosPorValor.
+- Decide cuál versión de totalCiudad dejarás en el motor y justifica la decisión entre legibilidad y recursos. Haz commit y push.
+
+
+##### Criterios de cumplimiento
+- Ambas versiones devuelven exactamente el mismo valor con 10.000 ventas.
+- La bitácora indica el número de recorridos y de arreglos intermedios de cada versión.
+- Se explica correctamente por qué O(4n) se simplifica a ONo.
+- Todas las funciones del motor tienen clasificada su complejidad espacial.
+- La decisión final está justificada con argumentos de legibilidad y de recursos.

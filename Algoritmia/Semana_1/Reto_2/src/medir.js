@@ -31,7 +31,7 @@ console.time("Tiempo recurrentes2");
 console.table(clientesRecurrentes(ventas_2));
 console.timeEnd("Tiempo recurrentes2");
 
-//
+//Con este for puedo probar por cada cantidad indicada en la instrucción riwi
 for (const n of cantidades) {
     const ventasP = generarVentas(n);
 

@@ -149,6 +149,16 @@ function clientesRecurrentes(ventas) {
   return recurrentes;
 }
 
+function totalCiudadCadena(ventas, ciudad){
+  //Debemos normalizar la ciudad con map
+  //Luego, usar filter, calcular valor con map y sumar con reduce.
+  //Recorrido con for.. of
+
+}
+
+function totalCiudadUnaPasad(ventas, ciudad){
+
+}
 
 module.exports = {
   generarVentas,
