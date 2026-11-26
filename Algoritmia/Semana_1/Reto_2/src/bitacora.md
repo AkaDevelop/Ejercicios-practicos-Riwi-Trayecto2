@@ -97,8 +97,6 @@ for (const n of cantidades) {
 | 8.000 | 376.071ms |
 | 16.000 | 1.747s |
 
-*Los tiempos deben registrarse en milisegundos según los resultados obtenidos en la consola con el ciclo for*
-
 ## 5. Análisis del crecimiento
 
 Al duplicar la cantidad de registros, el número de comparaciones de los ciclos anidados aumenta aproximadamente cuatro veces.
@@ -141,7 +139,7 @@ Tiempo recurrentes: 1:13.902 (m:ss.mmm) Ejecutado.
 
 **Precaución:** estas son estimaciones bajo un modelo O(n²), no tiempos reales garantizados. El costo de `includes()` puede modificar el crecimiento.
 
-Antes de ejecutar la prueba con 100.000 registros, se debe comprobar que la estimación sea inferior a dos minutos (120.000 ms).
+Antes de ejecutar la prueba con 100.000 registros, se debe comprobó que la estimación es inferior a dos minutos (120.000 ms).
 
 | Cantidad de ventas | Tiempo estimado | ¿Ejecutar? |
 | ---: | ---: | --- |
