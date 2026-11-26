@@ -77,10 +77,10 @@ Para observar el comportamiento del algoritmo con diferentes cantidades de regis
 const cantidades = [1000, 2000, 4000, 8000, 16000];
 
 for (const n of cantidades) {
-    const ventas = generarVentas(n);
+    const ventasP = generarVentas(n);
 
     console.time(`Tiempo para ${n} ventas`);
-    clientesRecurrentes(ventas);
+    clientesRecurrentes(ventasP);
     console.timeEnd(`Tiempo para ${n} ventas`);
 }
 ```
