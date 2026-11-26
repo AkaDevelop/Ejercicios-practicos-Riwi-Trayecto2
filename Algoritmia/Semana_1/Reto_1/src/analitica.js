@@ -158,7 +158,7 @@ function topProductosPorValor(ventas, k) {
       //Se mostrará el total de registros hallados
       //Total de registros 
     }
-     ka = ventas.length
+    ka = ventas.length
   }
 
 
