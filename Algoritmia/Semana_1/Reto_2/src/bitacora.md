@@ -119,23 +119,22 @@ En consecuencia, el tiempo de ejecución también puede aumentar considerablemen
 
 Para realizar una estimación inicial bajo un comportamiento cuadrático, se utiliza la siguiente relación:
 
-\[
+```
 Tiempo recurrentes: 1:5.902 (m:ss.mmm)
-\]
+```
 
 Tomando como referencia el tiempo medido con 16.000 registros:
 
 ### Estimación para 100.000 registros
 
-\[
+```
 Tiempo recurrentes: 1:13.902 (m:ss.mmm) Ejecutado.
-\]
+```
 
 ### Estimación para 1.000.000 de registros
-
-\[
+```
 15:13.902 (m:ss.mmm) Aproximado.
-\]
+```
 
 **Precaución:** estas son estimaciones bajo un modelo O(n²), no tiempos reales garantizados. El costo de `includes()` puede modificar el crecimiento.
 
