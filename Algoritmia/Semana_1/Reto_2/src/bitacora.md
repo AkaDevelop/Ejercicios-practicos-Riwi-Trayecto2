@@ -91,13 +91,13 @@ for (const n of cantidades) {
 
 | Cantidad de ventas (n) | Tiempo de ejecución |
 | ---: | ---: |
-| 1.000 | Pendiente |
-| 2.000 | Pendiente |
-| 4.000 | Pendiente |
-| 8.000 | Pendiente |
-| 16.000 | Pendiente |
+| 1.000 | 16.494ms |
+| 2.000 | 94.241ms |
+| 4.000 | 94.656ms |
+| 8.000 | 376.071ms |
+| 16.000 | 1.747s |
 
-*Los tiempos deben registrarse en milisegundos según los resultados obtenidos en la consola.*
+*Los tiempos deben registrarse en milisegundos según los resultados obtenidos en la consola con el ciclo for*
 
 ## 5. Análisis del crecimiento
 

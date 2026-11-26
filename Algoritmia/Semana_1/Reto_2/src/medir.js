@@ -8,8 +8,8 @@ const {
 } = require("./generador.js");
 
 const ventas = require("../../Reto_1/src/datos.js")
-const bigData = generarVentas(1000000);
-
+const bigData = generarVentas(1000);
+const cantidades = [1000, 2000, 4000, 8000, 16000];
 const ventas_2 = [
     { id: 1, cliente: "C001" },
     { id: 2, cliente: "C002" },
@@ -28,5 +28,14 @@ console.time("Tiempo recurrentes");
 console.table(clientesRecurrentes(bigData)); //Data con 1000 registros o dependiendo de la funcion que los genera.
 console.timeEnd("Tiempo recurrentes");
 console.time("Tiempo recurrentes2");
-console.table(clientesRecurrentes(ventas_2)); //Data con 1000 registros o dependiendo de la funcion que los genera.
+console.table(clientesRecurrentes(ventas_2));
 console.timeEnd("Tiempo recurrentes2");
+
+//
+for (const n of cantidades) {
+    const ventasP = generarVentas(n);
+
+    console.time(`Tiempo para ${n} ventas`);
+    clientesRecurrentes(ventasP);
+    console.timeEnd(`Tiempo para ${n} ventas`);
+}
