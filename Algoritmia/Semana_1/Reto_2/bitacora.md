@@ -182,3 +182,157 @@ En este ejercicio comprendí que un algoritmo puede resolver correctamente un pr
 También identifiqué que no basta con analizar los ciclos principales: los métodos utilizados dentro de ellos pueden introducir costos adicionales que modifican la complejidad total.
 
 El análisis de Big O, el conteo de operaciones y las mediciones reales permiten comprender mejor el comportamiento de una solución y tomar decisiones para mejorarla.
+
+# 10. Análisis de complejidad temporal y espacial
+
+## 10.1. Comparación de las versiones de total por ciudad
+
+Se implementaron dos versiones para calcular el total de ventas de una ciudad utilizando diferentes métodos de JavaScript.
+
+### Versión 1: `totalCiudadCadena()`
+
+Esta implementación utiliza los métodos `map()`, `filter()` y `reduce()`.
+
+```javascript
+function totalCiudadCadena(ventas, ciudad) {
+    const ventasCopia = ventas.map((venta) => ({
+        ...venta,
+        ciudad: venta.ciudad.trim().toLowerCase(),
+    }));
+
+    let ventasTotales = ventasCopia
+        .filter((venta) => venta.ciudad === ciudad.trim().toLowerCase())
+        .reduce((total, venta) => venta.cantidad + total, 0);
+
+    return console.table([
+        { ciudad: ciudad, "total de ventas": ventasTotales }
+    ]);
+}
+```
+
+**Recorridos realizados:**
+
+1. `map()`: recorre las ventas originales y crea un nuevo arreglo con las ciudades normalizadas.
+2. `filter()`: recorre el arreglo creado por `map()` y selecciona las ventas de la ciudad indicada. También crea otro arreglo.
+3. `reduce()`: recorre el resultado de `filter()` para acumular las cantidades.
+
+En el peor caso, los tres métodos pueden recorrer una cantidad proporcional a `n` registros.
+
+**Complejidad temporal:** O(n).
+
+**Complejidad espacial:** O(n).
+
+**Arreglos nuevos:** 2. Uno generado por `map()` y otro por `filter()`.
+
+### Versión 2: `totalCiudadUnaPasada()`
+
+Esta implementación utiliza `map()` y un ciclo `for...of`.
+
+```javascript
+function totalCiudadUnaPasada(ventas, ciudad) {
+    const ventasCopia = ventas.map((venta) => ({
+        ...venta,
+        ciudad: venta.ciudad.trim().toLowerCase(),
+    }));
+
+    let cantidadTotal = 0;
+
+    for (const venta of ventasCopia) {
+        if (venta.ciudad === ciudad.trim().toLowerCase()) {
+            cantidadTotal += venta.cantidad;
+        }
+    }
+
+    return console.table([
+        { ciudad: ciudad, "total de ventas": cantidadTotal }
+    ]);
+}
+```
+
+**Recorridos realizados:**
+
+1. `map()`: recorre las ventas originales y crea un nuevo arreglo con las ciudades normalizadas.
+2. `for...of`: recorre el arreglo creado para acumular las cantidades correspondientes a la ciudad solicitada.
+
+**Complejidad temporal:** O(n).
+
+**Complejidad espacial:** O(n).
+
+**Arreglos nuevos:** 1. El generado por `map()`.
+
+### Comparación de ambas versiones
+
+| Característica | `totalCiudadCadena()` | `totalCiudadUnaPasada()` |
+| --- | ---: | ---: |
+| Recorridos principales | 3 | 2 |
+| Arreglos nuevos | 2 | 1 |
+| Complejidad temporal | O(n) | O(n) |
+| Complejidad espacial | O(n) | O(n) |
+
+## 10.2. ¿Por qué ambas versiones son O(n)?
+
+Aunque una implementación realice más recorridos que la otra, ambas pertenecen a la misma categoría de complejidad temporal.
+
+Esto se debe a que Big O representa el crecimiento del algoritmo y no la cantidad exacta de instrucciones ejecutadas.
+
+Por ejemplo, si `n` representa la cantidad de ventas:
+
+- Dos recorridos completos representan aproximadamente `2n` operaciones.
+- Tres recorridos completos representan aproximadamente `3n` operaciones.
+- Cuatro recorridos completos representan aproximadamente `4n` operaciones.
+
+Sin embargo, al expresar estos resultados en Big O se eliminan las constantes:
+
+\[
+O(2n)=O(3n)=O(4n)=O(n)
+\]
+
+Por esta razón, ambas implementaciones tienen complejidad temporal lineal.
+
+**Importante:** que tengan la misma complejidad Big O no significa que necesariamente tarden lo mismo. La cantidad de recorridos, las copias de objetos y las operaciones internas pueden producir diferencias en el tiempo real de ejecución.
+
+## 10.3. Análisis de complejidad espacial del motor
+
+La complejidad espacial permite identificar cuánta memoria adicional necesita una función a medida que aumenta la cantidad de registros.
+
+Se clasifican las funciones según si utilizan memoria constante O(1) o memoria proporcional a los datos O(n).
+
+| Función | Complejidad espacial | Por qué |
+| --- | --- | --- |
+| `generarVentas` | O(n) | Crea un arreglo que almacena los n registros generados. |
+| `totalVendido` | O(1) | Utiliza variables acumuladoras y un contador, sin crear arreglos adicionales. |
+| `ventaMayor` | O(1) | Mantiene una referencia al registro mayor y un contador. |
+| `totalPorCiudad` | O(1) | Crea un `Map` de tamaño fijo con cuatro ciudades y otro `Map` de un solo elemento. |
+| `primeraVenta` | O(1) | Devuelve una referencia al primer registro sin crear estructuras adicionales. |
+| `clientesRecurrentes` | O(n) | Crea un arreglo donde almacena los clientes recurrentes. En el peor caso puede contener una cantidad proporcional a n. |
+| `totalCiudadCadena` | O(n) | Crea un arreglo con `map()` y otro con `filter()`. |
+| `totalCiudadUnaPasada` | O(n) | Crea un arreglo nuevo con `map()` que contiene los registros normalizados. |
+| `topProductosPorValor` | O(n) | Crea una copia de los registros con `map()` y un arreglo adicional con `slice()`. |
+
+### Observaciones sobre la memoria adicional
+
+**`totalPorCiudad()`**
+
+Aunque utiliza estructuras `Map`, su complejidad espacial es O(1), porque el primer `Map` contiene cuatro ciudades fijas y el resultado contiene una sola entrada.
+
+Su espacio no aumenta con la cantidad de ventas procesadas.
+
+**`topProductosPorValor()`**
+
+Esta función necesita memoria proporcional a la cantidad de registros porque crea una copia del arreglo original y posteriormente obtiene un nuevo arreglo con `slice()`.
+
+Por eso su complejidad espacial es O(n).
+
+**`clientesRecurrentes()`**
+
+También utiliza memoria adicional proporcional a los datos, porque almacena los clientes que identifica como recurrentes. Además, el método `includes()` realiza búsquedas dentro de ese arreglo, lo que afecta su complejidad temporal.
+
+## 10.4. Conclusión Día 2
+
+El análisis demuestra que la complejidad temporal y la espacial representan aspectos diferentes del rendimiento de un programa.
+
+Una función puede tener complejidad temporal O(n) y, al mismo tiempo, utilizar memoria adicional O(n), como sucede con las implementaciones que crean copias de arreglos mediante `map()` y `filter()`.
+
+Con esto comprendí que utilizar varios métodos de arrays no significa automáticamente tener una complejidad temporal mayor. Si cada método realiza un recorrido lineal, el resultado continúa siendo O(n), aunque la cantidad de recorridos influya en el tiempo real.
+
+Finalmente, reducir las estructuras temporales y evitar copias innecesarias puede ayudar a construir soluciones que aprovechen mejor la memoria disponible y el rendimiento general de un sistema.
