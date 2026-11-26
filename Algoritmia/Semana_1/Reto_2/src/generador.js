@@ -1,4 +1,3 @@
-
 function generarVentas(n) {
   //Primero se deben crear los registros para jugar con la aleatoriedad
   //Creamos una funcion con math.random Scada de 3wschool para valores aleatorios.
@@ -33,7 +32,7 @@ function generarVentas(n) {
       ciudad: ciudades[aleatorio(0, 3)],
       cantidad: aleatorio(1, 5),
       precio: productos[aleatorioNum].precio,
-      precioCOP: `$${productos[aleatorioNum].precio.toLocaleString("es-CO")}`
+      precioCOP: `$${productos[aleatorioNum].precio.toLocaleString("es-CO")}`,
     });
   }
   return bigDataVentas;
@@ -66,13 +65,12 @@ function ventaMayor(ventas) {
   // console.log(mayor);
 
   while (contador < ventas.length) {
-    
     if (
       ventas[contador].cantidad * ventas[contador].precio >
       mayor.cantidad * mayor.precio
     ) {
       mayor = ventas[contador];
-      
+
       // console.log(mayor);
     }
     //mayor.precioCop = `$${mayor.precio.toLocaleString("es-CO")}`;
@@ -84,7 +82,7 @@ function ventaMayor(ventas) {
         // console.log(mayor);
       }
     }*/
-  
+
   return mayor;
 }
 
@@ -131,7 +129,7 @@ function totalPorCiudad(ventas, ciudad) {
 }
 
 function primeraVenta(ventas) {
-  return ventas[0]
+  return ventas[0];
 }
 
 function clientesRecurrentes(ventas) {
@@ -140,7 +138,10 @@ function clientesRecurrentes(ventas) {
 
   for (let i = 0; i < ventas.length; i++) {
     for (let j = i + 1; j < ventas.length; j++) {
-      if (ventas[i].cliente === ventas[j].cliente && !recurrentes.includes(ventas[i].cliente)) {
+      if (
+        ventas[i].cliente === ventas[j].cliente &&
+        !recurrentes.includes(ventas[i].cliente)
+      ) {
         recurrentes.push(ventas[i].cliente);
       }
     }
@@ -149,16 +150,23 @@ function clientesRecurrentes(ventas) {
   return recurrentes;
 }
 
-function totalCiudadCadena(ventas, ciudad){
-  //Debemos normalizar la ciudad con map
+function totalCiudadCadena(ventas, ciudad) {
+  //Debemos normalizar la ciudad con map Listo
   //Luego, usar filter, calcular valor con map y sumar con reduce.
   //Recorrido con for.. of
 
+  const ventasCopia = ventas.map((venta) => ({
+    ...venta,
+    ciudad: venta.ciudad.trim().toLowerCase()
+  }));
+  return console.table(ventasCopia
+    .filter((venta) => venta.ciudad === ciudad.trim().toLowerCase())
+    .reduce((total, venta) => venta.cantidad + total, 0));
+
+  console.table(ventasCopia);
 }
 
-function totalCiudadUnaPasad(ventas, ciudad){
-
-}
+function totalCiudadUnaPasada(ventas, ciudad) {}
 
 module.exports = {
   generarVentas,
@@ -166,7 +174,8 @@ module.exports = {
   totalVendido,
   ventaMayor,
   primeraVenta,
-  clientesRecurrentes
+  clientesRecurrentes,
+  totalCiudadCadena,
 };
 /*console.table(bigData);
 //totalVendido(bigData)

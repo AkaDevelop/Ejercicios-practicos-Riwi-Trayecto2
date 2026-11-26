@@ -141,24 +141,24 @@ function topProductosPorValor(ventas, k) {
 
   //Ordenamos con sort de manera descendente, para poder tener el mayor de primero siempre.
   ventasCopia.sort((ventaMayor, ventaMenor) => ventaMenor.total - ventaMayor.total);
-  let ka = k
+
   //Con el if estamos diciendo practicamente si no tienes 
   //Un valor en la funcion definido con anterioridad pide un input al usuario.
 
 
-  if ((ka < 0 || ka > ventas.length) || !Number.isInteger(ka)) {
-    if (ka === null || ka === undefined) {
-      //Controlamos ka con while para que cumpla una longitud valida
+  if ((k < 0 || k > ventas.length) || !Number.isInteger(k)) {
+    if (k === null || k === undefined) {
+      //Controlamos k con while para que cumpla una longitud valida
       //Y coherente con el array que estamos validando
       while (true) {
-        ka = Number(prompts("Ingrese la cantidad de registros que desea ver: "))
+        k = Number(prompts("Ingrese la cantidad de registros que desea ver: "))
         break;
       }
       //si k registros no existe entonces k = ventas.longitud y melo.
       //Se mostrará el total de registros hallados
       //Total de registros 
     }
-    ka = ventas.length
+    k = ventas.length
   }
 
 

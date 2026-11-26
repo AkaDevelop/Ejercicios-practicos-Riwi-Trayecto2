@@ -3,10 +3,19 @@
 Un compañero de Nodo Digital agregó al motor un reporte de clientes recurrentes (clientes que compraron más de una vez). Con los datos de prueba funcionó, pero cuando la gerente lo ejecutó con el historial anual “se quedó pensando varios minutos”. Esta es la función que escribió tu compañero:
 
 ```
-function clientesRecurrentes(ventas) {</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> const recurrentes = [];</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> for (let i = 0; i < ventas.length; i++) {</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> for (let j = i + 1; j < ventas.length; j++) {</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> if (ventas[i].cliente === ventas[j].cliente &&</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> !recurrentes.includes(ventas[i].cliente)) {</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> recurrentes.push(ventas[i].cliente);</code><br><code style="color: #a3315c; background: #f3f3f5; padding: .08em .35em; border-radius: 5px; font-family: Consolas,monospace; font-size: .9em;"> }
-}
-}
-return recurrentes;
+function clientesRecurrentes(ventas) {
+  //Recurrentes lento, cliclos anidados Big O(n2)
+  const recurrentes = [];
+
+  for (let i = 0; i < ventas.length; i++) {
+    for (let j = i + 1; j < ventas.length; j++) {
+      if (ventas[i].cliente === ventas[j].cliente && !recurrentes.includes(ventas[i].cliente)) {
+        recurrentes.push(ventas[i].cliente);
+      }
+    }
+  }
+
+  return recurrentes;
 }
 ```
 
