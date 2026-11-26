@@ -65,18 +65,6 @@ const ventas = [
 
 El primer ciclo realiza `n` iteraciones, mientras que el segundo compara cada registro con los registros posteriores.
 
-La cantidad de comparaciones entre clientes se calcula mediante:
-
-\[
-C(n)=\frac{n(n-1)}{2}
-\]
-
-Para 5 ventas:
-
-\[
-C(5)=\frac{5(5-1)}{2}=10
-\]
-
 Por lo tanto, el número de comparaciones crece cuadráticamente respecto a la cantidad de ventas: **O(n²)** para los dos ciclos por sí solos.
 
 ## 4. Medición del tiempo de ejecución
@@ -134,7 +122,7 @@ En consecuencia, el tiempo de ejecución también puede aumentar considerablemen
 Para realizar una estimación inicial bajo un comportamiento cuadrático, se utiliza la siguiente relación:
 
 \[
-T(n_2)\approx T(n_1)\times\left(\frac{n_2}{n_1}\right)^2
+Tiempo recurrentes: 1:5.902 (m:ss.mmm)
 \]
 
 Tomando como referencia el tiempo medido con 16.000 registros:
@@ -142,13 +130,13 @@ Tomando como referencia el tiempo medido con 16.000 registros:
 ### Estimación para 100.000 registros
 
 \[
-T(100000)\approx T(16000)\times 39.0625
+Tiempo recurrentes: 1:13.902 (m:ss.mmm) Ejecutado.
 \]
 
 ### Estimación para 1.000.000 de registros
 
 \[
-T(1000000)\approx T(16000)\times 3906.25
+15:13.902 (m:ss.mmm) Aproximado.
 \]
 
 **Precaución:** estas son estimaciones bajo un modelo O(n²), no tiempos reales garantizados. El costo de `includes()` puede modificar el crecimiento.
@@ -157,8 +145,8 @@ Antes de ejecutar la prueba con 100.000 registros, se debe comprobar que la esti
 
 | Cantidad de ventas | Tiempo estimado | ¿Ejecutar? |
 | ---: | ---: | --- |
-| 100.000 | Pendiente | Solo si es inferior a 120.000 ms |
-| 1.000.000 | Pendiente | No ejecutar sin evaluar previamente el costo |
+| 100.000 |  1:13.902 (m:ss.mmm) | Solo si es inferior a 120.000 ms |
+| 1.000.000 | 15:13.902 (m:ss.mmm) | No ejecutar sin evaluar previamente el costo |
 
 ## 7. Identificación del costo oculto: `includes()`
 
@@ -174,15 +162,11 @@ Esto significa que no solamente se realizan las comparaciones de los dos ciclos 
 
 En el peor caso, el arreglo puede contener O(n) clientes recurrentes y `includes()` puede necesitar O(n) operaciones por llamada.
 
-Si se combina ese costo con las comparaciones de los ciclos anidados, el límite superior del algoritmo puede llegar a:
-
-\[
-O(n^2)\times O(n)=O(n^3)
-\]
+Si se combina ese costo con las comparaciones de los ciclos anidados, el límite superior del algoritmo puede llegar iterarse simultaneamente en 3 dimensiones.
 
 Por tanto, la complejidad de peor caso de la implementación completa es **O(n³)**.
 
-Es importante distinguir que esto representa el peor escenario posible. Con los datos generados aleatoriamente por `generarVentas()`, el comportamiento observado puede ser diferente.
+Es importante distinguir que esto representa el peor escenario posible. Con los datos generados aleatoriamente por `generarVentas()`, el comportamiento observado puede ser diferente según la cantidad.
 
 ## 8. Conclusión para la gerente
 
