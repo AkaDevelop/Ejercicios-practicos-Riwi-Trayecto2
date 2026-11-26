@@ -164,7 +164,7 @@ function topProductosPorValor(ventas, k) {
 
   //Como ya confirmamos que K es válido, ahora si hacemos un slice,
   //Para imprimir desde la posicion 0 hasta k.
-  return console.table(ventasCopia.slice(0, ka))
+  return console.table(ventasCopia.slice(0, k))
 }
 
 module.exports = {
