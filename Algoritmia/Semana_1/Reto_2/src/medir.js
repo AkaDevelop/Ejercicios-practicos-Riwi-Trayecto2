@@ -5,7 +5,8 @@ const {
     generarVentas,
     primeraVenta,
     clientesRecurrentes,
-    totalCiudadCadena
+    totalCiudadCadena,
+    totalCiudadUnaPasada
 } = require("./generador.js");
 
 const ventas = require("../../Reto_1/src/datos.js")
@@ -41,4 +42,4 @@ for (const n of cantidades) {
     console.timeEnd(`Tiempo para ${n} ventas`);
 }
 
-totalCiudadCadena(bigData, "Medellín");
+totalCiudadUnaPasada(bigData, "Bogotá");

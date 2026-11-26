@@ -154,19 +154,20 @@ function totalCiudadCadena(ventas, ciudad) {
   //Debemos normalizar la ciudad con map Listo
   //Luego, usar filter, calcular valor con map y sumar con reduce.
   //Recorrido con for.. of
-
-  const ventasCopia = ventas.map((venta) => ({
-    ...venta,
-    ciudad: venta.ciudad.trim().toLowerCase()
-  }));
-  return console.table(ventasCopia
-    .filter((venta) => venta.ciudad === ciudad.trim().toLowerCase())
-    .reduce((total, venta) => venta.cantidad + total, 0));
-
-  console.table(ventasCopia);
 }
 
-function totalCiudadUnaPasada(ventas, ciudad) {}
+function totalCiudadUnaPasada(ventas, ciudad) {
+  const ventasCopia = ventas.map((venta) => ({
+    ...venta,
+    ciudad: venta.ciudad.trim().toLowerCase(),
+  }));
+
+  let ventasTotales = ventasCopia
+    .filter((venta) => venta.ciudad === ciudad.trim().toLowerCase())
+    .reduce((total, venta) => venta.cantidad + total, 0);
+
+  console.table([{ ciudad: ciudad, total: ventasTotales }]);
+}
 
 module.exports = {
   generarVentas,
@@ -176,6 +177,7 @@ module.exports = {
   primeraVenta,
   clientesRecurrentes,
   totalCiudadCadena,
+  totalCiudadUnaPasada
 };
 /*console.table(bigData);
 //totalVendido(bigData)
