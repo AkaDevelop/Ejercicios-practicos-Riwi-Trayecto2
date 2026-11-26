@@ -141,33 +141,30 @@ function topProductosPorValor(ventas, k) {
 
   //Ordenamos con sort de manera descendente, para poder tener el mayor de primero siempre.
   ventasCopia.sort((ventaMayor, ventaMenor) => ventaMenor.total - ventaMayor.total);
-
+  let ka = k
   //Con el if estamos diciendo practicamente si no tienes 
   //Un valor en la funcion definido con anterioridad pide un input al usuario.
-  if (k === null || k === undefined) {
-    //Controlamos K con while para que cumpla una longitud valida
-    //Y coherente con el array que estamos validando
-    while (true) {
-      k = Number(prompts("Ingrese la cantidad de registros que desea ver: "))
 
 
-      if (k < 0 || k > ventas.length || !Number.isInteger(k)) {
-
-        //si k registros no existe entonces k = ventas.longitud y melo.
-        //Se mostrará el total de registros hallados
-        //Total de registros 
-        k = ventas.length
+  if ((ka < 0 || ka > ventas.length) || !Number.isInteger(ka)) {
+    if (ka === null || ka === undefined) {
+      //Controlamos ka con while para que cumpla una longitud valida
+      //Y coherente con el array que estamos validando
+      while (true) {
+        ka = Number(prompts("Ingrese la cantidad de registros que desea ver: "))
         break;
       }
-      break;
+      //si k registros no existe entonces k = ventas.longitud y melo.
+      //Se mostrará el total de registros hallados
+      //Total de registros 
     }
-
+     ka = ventas.length
   }
 
 
   //Como ya confirmamos que K es válido, ahora si hacemos un slice,
   //Para imprimir desde la posicion 0 hasta k.
-  return console.table(ventasCopia.slice(0, k))
+  return console.table(ventasCopia.slice(0, ka))
 }
 
 module.exports = {

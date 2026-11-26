@@ -45,7 +45,7 @@ while (true) {
         continue
     }
     else if (option == 3) {
-        topProductosPorValor(ventas,3) //Falta construir la función todavía.
+        topProductosPorValor(ventas,) //Falta construir la función todavía.
         continue
     }
     else if (option == 4) {
