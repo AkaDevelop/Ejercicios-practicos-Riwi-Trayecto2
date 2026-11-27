@@ -25,6 +25,9 @@ const testObject_3 = new Nodo(limpiezaDental);
 testObject_1.siguiente = testObject_2
 testObject_2.siguiente = testObject_3
 
+
+//Orden cronológico descendente.
+console.table(testObject_2.siguiente.dato)
 console.table(testObject_1.dato);
 console.table(testObject_1.siguiente.dato)
-console.table(testObject_2.siguiente.dato)
+
