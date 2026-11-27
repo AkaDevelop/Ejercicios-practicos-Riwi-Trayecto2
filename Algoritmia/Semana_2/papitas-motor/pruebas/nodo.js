@@ -18,6 +18,13 @@ let limpiezaDental = {
     costo: 150000
 }
 //Prueba#1: interiorizando concepto de listas enlazadas.
-const testObject_1 = new Nodo(controlDePeso)
+const testObject_1 = new Nodo(controlDePeso);
+const testObject_2 = new Nodo(vacunacion);
+const testObject_3 = new Nodo(limpiezaDental);
 
-console.log(testObject_1.dato.fecha)
+testObject_1.siguiente = testObject_2
+testObject_2.siguiente = testObject_3
+
+console.table(testObject_1.dato);
+console.table(testObject_1.siguiente.dato)
+console.table(testObject_2.siguiente.dato)
