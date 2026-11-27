@@ -168,14 +168,14 @@ function totalCiudadCadena(ventas, ciudad) {
 
 function totalCiudadUnaPasada(ventas, ciudad) {
   //Recorrido con for.. of
-  const ventasCopia = ventas.map((venta) => ({
+  /*const ventasCopia = ventas.map((venta) => ({
     ...venta,
     ciudad: venta.ciudad.trim().toLowerCase(),
-  }));
-
+  }));*/
+  const ciudadBuscada = ciudad.trim().toLowerCase();
   let cantidadTotal = 0;
-  for(const venta of ventasCopia){
-    if(venta.ciudad === ciudad.trim().toLowerCase()){
+  for(const venta of ventas){
+    if(venta.ciudad.trim().toLowerCase() === ciudadBuscada){
         cantidadTotal += venta.cantidad
         //console.log(venta)
     }

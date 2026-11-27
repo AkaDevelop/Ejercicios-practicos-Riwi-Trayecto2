@@ -230,44 +230,42 @@ Esta implementación utiliza `map()` y un ciclo `for...of`.
 
 ```javascript
 function totalCiudadUnaPasada(ventas, ciudad) {
-    const ventasCopia = ventas.map((venta) => ({
-        ...venta,
-        ciudad: venta.ciudad.trim().toLowerCase(),
-    }));
-
-    let cantidadTotal = 0;
-
-    for (const venta of ventasCopia) {
-        if (venta.ciudad === ciudad.trim().toLowerCase()) {
-            cantidadTotal += venta.cantidad;
-        }
+  //Recorrido con for.. of
+  /*const ventasCopia = ventas.map((venta) => ({
+    ...venta,
+    ciudad: venta.ciudad.trim().toLowerCase(),
+  }));*/
+  const ciudadBuscada = ciudad.trim().toLowerCase();
+  let cantidadTotal = 0;
+  for(const venta of ventas){
+    if(venta.ciudad.trim().toLowerCase() === ciudadBuscada){
+        cantidadTotal += venta.cantidad
+        //console.log(venta)
     }
+    //console.log(venta)
+  }
 
-    return console.table([
-        { ciudad: ciudad, "total de ventas": cantidadTotal }
-    ]);
+  return console.table([{"ciudad": ciudad, "total de ventas": cantidadTotal}]);
 }
 ```
 
 **Recorridos realizados:**
 
-1. `map()`: recorre las ventas originales y crea un nuevo arreglo con las ciudades normalizadas.
-2. `for...of`: recorre el arreglo creado para acumular las cantidades correspondientes a la ciudad solicitada.
+1. `for...of`: recorre el arreglo creado para acumular las cantidades correspondientes a la ciudad solicitada.
 
 **Complejidad temporal:** O(n).
 
-**Complejidad espacial:** O(n).
+**Complejidad espacial:** O(1).
 
-**Arreglos nuevos:** 1. El generado por `map()`.
 
 ### Comparación de ambas versiones
 
 | Característica | `totalCiudadCadena()` | `totalCiudadUnaPasada()` |
 | --- | ---: | ---: |
-| Recorridos principales | 3 | 2 |
-| Arreglos nuevos | 2 | 1 |
+| Recorridos principales | 3 | 1 |
+| Arreglos nuevos | 2 | 0 |
 | Complejidad temporal | O(n) | O(n) |
-| Complejidad espacial | O(n) | O(n) |
+| Complejidad espacial | O(n) | O(1) |
 
 ## 10.2. ¿Por qué ambas versiones son O(n)?
 
@@ -306,7 +304,7 @@ Se clasifican las funciones según si utilizan memoria constante O(1) o memoria 
 | `primeraVenta` | O(1) | Devuelve una referencia al primer registro sin crear estructuras adicionales. |
 | `clientesRecurrentes` | O(n) | Crea un arreglo donde almacena los clientes recurrentes. En el peor caso puede contener una cantidad proporcional a n. |
 | `totalCiudadCadena` | O(n) | Crea un arreglo con `map()` y otro con `filter()`. |
-| `totalCiudadUnaPasada` | O(n) | Crea un arreglo nuevo con `map()` que contiene los registros normalizados. |
+| `totalCiudadUnaPasada` | O(1) | Recorre el arreglo original una vez. |
 | `topProductosPorValor` | O(n) | Crea una copia de los registros con `map()` y un arreglo adicional con `slice()`. |
 
 ### Observaciones sobre la memoria adicional
