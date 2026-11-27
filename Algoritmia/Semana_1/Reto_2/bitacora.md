@@ -143,7 +143,7 @@ Antes de ejecutar la prueba con 100.000 registros, se comprobó que la estimaci�
 | Cantidad de ventas | Tiempo estimado | ¿Ejecutar? |
 | ---: | ---: | --- |
 | 100.000 |  1:13.902 (m:ss.mmm) | Solo si es inferior a 120.000 ms |
-| 1.000.000 | 15:13.902 (m:ss.mmm) | No ejecutar sin evaluar previamente el costo |
+| 1.000.000 | 15:13.902 (m:ss.mmm) | No se ejecuta, por el costo que tiene... |
 
 ## 7. Identificación del costo oculto: `includes()`
 
