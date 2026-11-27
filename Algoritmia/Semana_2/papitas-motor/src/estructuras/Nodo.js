@@ -1,6 +1,8 @@
 class Node {
-    constructor(dato, siguiente){
+    constructor(dato){
         this.dato = dato;
-        this.siguiente = siguiente;
+        this.siguiente = null;
     }
 }
+
+const fecha = new Node("Fecha") //Prueba: interiorizando concepto de listas enlazadas.
