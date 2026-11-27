@@ -1,8 +1,15 @@
-class Node {
+class Nodo {
     constructor(dato){
         this.dato = dato;
         this.siguiente = null;
     }
 }
 
-const fecha = new Node("Fecha") //Prueba: interiorizando concepto de listas enlazadas.
+
+
+
+
+module.exports = {
+    Nodo,
+
+}
